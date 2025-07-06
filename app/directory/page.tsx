@@ -174,7 +174,6 @@ function DirectoryContent() {
       {loading ? (
         <div className="flex flex-col items-center py-12">
           <LoadingBrackets />
-          <p className="text-muted-foreground mt-4">Loading members...</p>
         </div>
       ) : error ? (
         <div className="text-center py-12">

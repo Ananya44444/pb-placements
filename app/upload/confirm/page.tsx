@@ -517,7 +517,6 @@ const handleSubmit = async (e: React.FormEvent) => {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh]">
         <LoadingBrackets />
-        <p className="text-muted-foreground mt-4">Loading profile...</p>
       </div>
     );
   }
