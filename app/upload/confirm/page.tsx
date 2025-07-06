@@ -30,7 +30,7 @@ import {
   Plus
 } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
-
+import LoadingBrackets from "@/components/ui/loading-brackets";
 interface ParsedData {
   id: string;
   name: string;
@@ -514,7 +514,12 @@ const handleSubmit = async (e: React.FormEvent) => {
 };
 
   if (loading) {
-    return <div className="p-6 text-white">Loading profile...</div>;
+    return (
+      <div className="flex flex-col items-center justify-center min-h-[60vh]">
+        <LoadingBrackets />
+        <p className="text-muted-foreground mt-4">Loading profile...</p>
+      </div>
+    );
   }
 
   return (
@@ -923,7 +928,13 @@ const handleSubmit = async (e: React.FormEvent) => {
 
 export default function ConfirmPage() {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={
+    <div className="flex flex-col items-center justify-center min-h-[60vh]">
+          <LoadingBrackets />
+          <p className="text-muted-foreground mt-4">Loading profile...</p>
+        </div>
+      }
+    >
       <ConfirmPageContent />
     </Suspense>
   );

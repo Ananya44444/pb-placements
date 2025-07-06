@@ -23,6 +23,8 @@ import { ProjectSection } from '@/components/profile/project-section';
 import Image from "next/image";
 import { User } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Suspense } from "react";
+import LoadingBrackets from "@/components/ui/loading-brackets";
 
 interface ProfilePageProps {
   params: Promise<{
@@ -57,8 +59,16 @@ export async function generateMetadata({ params }: ProfilePageProps): Promise<Me
     description: `View ${member.name}'s developer profile on Point Blank`,
   };
 }
+function ProfileLoading() {
+  return (
+    <div className="flex flex-col items-center justify-center min-h-[60vh]">
+      <LoadingBrackets />
+      <p className="text-muted-foreground mt-4">Loading profile...</p>
+    </div>
+  );
+}
 
-export default async function ProfilePage({ params }: ProfilePageProps) {
+async function ProfilePage({ params }: ProfilePageProps) {
   const { id } = await params;
   const supabase = createServerComponentClient({ cookies });
   const { data: { user } } = await supabase.auth.getUser();
@@ -370,4 +380,10 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
     </div>
   );
 }
-            
+const ProfilePageWithSuspense = (props: ProfilePageProps) => (
+  <Suspense fallback={<ProfileLoading />}>
+    <ProfilePage {...props} />
+  </Suspense>
+);
+
+export default ProfilePageWithSuspense;           

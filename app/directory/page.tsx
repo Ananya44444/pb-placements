@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { createClient } from '@supabase/supabase-js';
+import LoadingBrackets from "@/components/ui/loading-brackets";
 
 interface Member {
   id: string;
@@ -171,11 +172,9 @@ function DirectoryContent() {
       </div>
       
       {loading ? (
-        <div className="flex justify-center py-12">
-          <div className="animate-pulse text-center">
-            <div className="h-6 w-32 bg-muted rounded mx-auto"></div>
-            <p className="text-muted-foreground mt-2">Loading members...</p>
-          </div>
+        <div className="flex flex-col items-center py-12">
+          <LoadingBrackets />
+          <p className="text-muted-foreground mt-4">Loading members...</p>
         </div>
       ) : error ? (
         <div className="text-center py-12">
@@ -233,10 +232,10 @@ function DirectoryLoading() {
         <div className="h-16 bg-muted rounded animate-pulse"></div>
       </div>
       
-      <div className="flex justify-center py-12">
-        <div className="animate-pulse text-center">
-          <div className="h-6 w-32 bg-muted rounded mx-auto"></div>
-          <p className="text-muted-foreground mt-2">Loading directory...</p>
+       <div className="flex justify-center py-12">
+        <div className="flex flex-col items-center">
+          <LoadingBrackets />
+          <p className="text-muted-foreground mt-4">Loading directory...</p>
         </div>
       </div>
     </div>
